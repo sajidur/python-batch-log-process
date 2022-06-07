@@ -1,9 +1,8 @@
 import smtplib
 
 class Mailer:
-     def __init__(self, name, age):
-        self.name = name
-        self.age = age
+     def __init__(self):
+         self=self
 
      def sendMail(FROM,TO,SUBJECT,TEXT,SERVER):
         """this is some test documentation in the function"""
