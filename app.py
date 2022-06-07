@@ -1,5 +1,10 @@
 from batch import Batch
 
 
-p1 = Batch()
-p1.ProcessLog()
+import sched
+import time
+
+while True:
+    p1 = Batch()
+    p1.ProcessLog()
+    time.sleep(30)
