@@ -13,15 +13,11 @@ class Mailer:
 
      def send(self,TO,TEXT):
         context = ssl.create_default_context()
-                # Try to log in to server and send email
         try:
             server = smtplib.SMTP(self.smtp_server,self.port)
-            server.ehlo() # Can be omitted
             server.starttls(context=context) # Secure the connection
-            server.ehlo() # Can be omitted
             server.login(self.sender_email, self.password)
             server.sendmail(self.sender_email, TO, TEXT)
-            # TODO: Send email here
         except Exception as e:
             # Print any error messages to stdout
             print(e)
