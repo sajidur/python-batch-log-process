@@ -13,13 +13,11 @@ class Batch:
   def ProcessLog(self):
     fileDate = str(date.today())
     theBody = []
-    
-    tmpFile = open(self.file_path+""+fileDate)
+    print(self.file_path+""+fileDate)
+    tmpFile = open(self.file_path)
     for line in tmpFile:
         if self.pattern.lower() in line.lower(): 
           print(line )   
           mailer=Mailer() 
          # mailer.send("sajid.ict@hotmail.com",line)
     tmpFile.close() 
-p1 = Batch()
-p1.ProcessLog()
