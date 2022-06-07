@@ -4,7 +4,7 @@ import linecache
 
 from mailer import Mailer
 class Batch:
-  def __init__(self,file_path,pattern):
+  def __init__(self):
     with open('config.json', 'r') as f:
       config = json.load(f)
       self.file_path=config["file_path"]
@@ -18,7 +18,7 @@ class Batch:
         if self.pattern.lower() in line.lower(): 
           print(line )   
           mailer=Mailer() 
-          mailer.sendMail(self.email,"Test",line,"smtp.gmail.com")
+          mailer.send("sajid.ict@hotmail.com",line)
     tmpFile.close() 
-p1 = Batch("","")
+p1 = Batch()
 p1.ProcessLog()

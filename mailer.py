@@ -1,18 +1,29 @@
-import smtplib
+import smtplib, ssl
+import json
 
 class Mailer:
      def __init__(self):
-         self=self
+        with open('config.json', 'r') as f:
+         config = json.load(f)
+         self.smtp_server=config["smtp_server"]
+         self.port=config["port"]
+         self.sender_email=config["sender_email"]
+         self.password=config["password"]
 
-     def sendMail(FROM,TO,SUBJECT,TEXT,SERVER):
-        """this is some test documentation in the function"""
-        message = """\
-        From: %s
-        To: %s
-        Subject: %s
-        %s
-        """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
-        # Send the mail
-        server = smtplib.SMTP(SERVER)
-        server.sendmail(FROM, TO, message)
-        server.quit()
+
+     def send(self,TO,TEXT):
+        context = ssl.create_default_context()
+                # Try to log in to server and send email
+        try:
+            server = smtplib.SMTP(self.smtp_server,self.port)
+            server.ehlo() # Can be omitted
+            server.starttls(context=context) # Secure the connection
+            server.ehlo() # Can be omitted
+            server.login(self.sender_email, self.password)
+            server.sendmail(self.sender_email, TO, TEXT)
+            # TODO: Send email here
+        except Exception as e:
+            # Print any error messages to stdout
+            print(e)
+        finally:
+            server.quit() 
