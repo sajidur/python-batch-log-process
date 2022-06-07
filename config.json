@@ -1,0 +1,6 @@
+{
+    "file_path":"E:/python-batch-log-process/api-app-error.log",
+    "pattern":"error",
+    "email":"sajid.ict@hotmail.com",
+    "is_smail_send":true
+}
